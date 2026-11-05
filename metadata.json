@@ -1,0 +1,8 @@
+{
+  "name": "Portfolio",
+  "description": "Interactive portfolio featuring cinematic scroll-driven canvas visuals, project showcase, disciplines, and live visual theme editor.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

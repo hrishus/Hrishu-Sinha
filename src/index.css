@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-primary: #08080b;
+    --bg-surface: #101015;
+    --bg-surface-elevated: #16161d;
+    --border: #1d1d26;
+    --border-highlight: rgba(247, 103, 7, 0.35);
+
+    --accent: #ff7300;
+    --accent-orange: #ff7300;
+    --accent-light: #f2c27f;
+    --accent-dim: rgba(247, 103, 7, 0.12);
+    --accent-glow: rgba(247, 103, 7, 0.35);
+
+    --text-primary: #f4f4f6;
+    --text-secondary: #9d9dae;
+    --text-muted: #626274;
+
+    --font-heading: 'Bebas Neue', sans-serif;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-condensed: 'Anton', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-hand: 'Caveat', cursive;
+    --font-source: 'Source Sans 3', sans-serif;
+    --font-nothing: 'Nothing You Could Do', cursive;
+    --font-ga-maamli: 'Ga Maamli', cursive, sans-serif;
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-pill: 9999px;
+
+    --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-slow: 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  p, blockquote {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  }
+
+  .font-mono, .font-source, .font-nothing, .font-ga-maamli, .font-hand {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  }
+
+  .hero-name {
+    font-family: var(--font-condensed) !important;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    background: #000;
+    color: var(--text-primary);
+    color-scheme: dark;
+    overflow-x: clip;
+  }
+
+  body {
+    background: transparent;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom font utility classes */
+.font-sans { font-family: var(--font-sans); }
+.font-heading { font-family: var(--font-heading); }
+.font-display { font-family: var(--font-display); }
+.font-condensed { font-family: var(--font-condensed); }
+.font-body { font-family: var(--font-body); }
+.font-mono { font-family: var(--font-mono); }
+.font-hand { font-family: var(--font-hand); }
+.font-source { font-family: var(--font-source); }
+.font-nothing { font-family: var(--font-nothing); }
+.font-ga-maamli { font-family: var(--font-ga-maamli); }
+
+/* Canvas Background & Vignette */
+.fixed-canvas-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 0;
+  pointer-events: none;
+  background: url('/ambient_bg.jpg') center/cover no-repeat, radial-gradient(ellipse at 50% 48%, #220f04 0%, #0e0602 45%, #050302 100%);
+  overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+#heroCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  transform: translateZ(0);
+}
+
+.canvas-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+/* Outlined Watermark */
+.hero-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -46%);
+  font-family: var(--font-condensed);
+  font-size: clamp(3.5rem, 14vw, 15rem);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(247, 103, 7, 0.22);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  white-space: nowrap;
+  transition: -webkit-text-stroke 0.25s ease;
+}
+
+/* Inline Click-to-Edit Highlights */
+body.ve-inline-active [data-ve-editable] {
+  outline: 1.5px dashed rgba(247, 103, 7, 0.6) !important;
+  cursor: text !important;
+  transition: outline 0.15s, background-color 0.15s;
+  border-radius: 4px;
+}
+
+body.ve-inline-active [data-ve-editable]:hover {
+  outline: 2px solid var(--accent-orange) !important;
+  background-color: rgba(247, 103, 7, 0.1) !important;
+}
+
+body.ve-inline-active [data-ve-editable]:focus {
+  outline: 2.5px solid var(--accent-orange) !important;
+  background-color: rgba(247, 103, 7, 0.18) !important;
+}
+
+/* Range input styling */
+input[type="range"].ve-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+  outline: none;
+}
+
+input[type="range"].ve-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(247, 103, 7, 0.6);
+  transition: transform 0.15s;
+}
+
+input[type="range"].ve-range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Hide all scrollbars globally across the entire webpage for a clean, minimalist design */
+*, *::before, *::after {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
+}
+
+::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Opera */
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html, body {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
