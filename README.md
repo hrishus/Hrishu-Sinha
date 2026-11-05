@@ -1,21 +1,12 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# MY PORTFOLIO
 
-# Run and deploy your AI Studio app
+This contains the source to my first website I created as a portfolio using AI.
 
-This contains everything you need to run your app locally.
+## DO CHECK IT OUT
+1. Contain a hero section with number of animated elements.
+2. Has a custom cursor for the website.
+3. Resume attatched as an effecient piece for my clients.
+4. Includes few of my projects I have worked on.
+5. Every element is desinged by me using some inspiration from pinterest.
 
-View your app in AI Studio: https://ai.studio/apps/915e9174-ef3e-4e62-8965-e094153b426f
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
-"# Hrishu-Sinha" 
+# Hrishu-Sinha 
