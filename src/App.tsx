@@ -35,58 +35,7 @@ const TABLET_ANCHOR_POSITIONS: Record<string, number> = {
 };
 
 export default function App() {
-  const [content] = useState<PortfolioContent>(() => {
-    try {
-      const saved = localStorage.getItem('portfolio_visual_editor_state');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed?.typography && (!parsed.typography.fontCondensed || parsed.typography.fontCondensed.includes('Bebas'))) {
-          parsed.typography.fontCondensed = "'Anton', sans-serif";
-        }
-        if (parsed?.contact) {
-          if (!parsed.contact.author || parsed.contact.author === 'Rayhan' || parsed.contact.author === 'Hrishu Sinha') {
-            parsed.contact.author = 'Hrishu';
-          }
-          if (!parsed.contact.quote || parsed.contact.quote.includes('Good design')) {
-            parsed.contact.quote = '"Design that speaks. Technology that delivers."';
-          }
-          if (!parsed.contact.topCta || parsed.contact.topCta.includes('SOMETHING GREAT') || parsed.contact.topCta.includes("LET'S CREATE")) {
-            parsed.contact.topCta = 'YOUR NEXT BIG IDEA\nSTARTS HERE';
-          }
-          if (!parsed.contact.headline || parsed.contact.headline.includes("LET'S WORK") || parsed.contact.headlineHighlight === 'TOGETHER') {
-            parsed.contact.headline = 'READY TO';
-            parsed.contact.headlineHighlight = 'BUILD?';
-          }
-          if (parsed.contact.email?.includes('rayhan') || parsed.contact.email === 'hello@hrishusinha.com') {
-            parsed.contact.email = 'hrishusinha674@gmail.com';
-          }
-          if (parsed.contact.phone === '+62 812 3456 7890' || !parsed.contact.phone) {
-            parsed.contact.phone = '9394500884';
-          }
-          if (parsed.contact.location === 'Jakarta, Indonesia' || !parsed.contact.location) {
-            parsed.contact.location = 'Assam, India';
-          }
-          if (parsed.contact.website?.includes('rayhan') || parsed.contact.website === 'www.hrishusinha.com') {
-            parsed.contact.website = '';
-          }
-          if (parsed.contact.copyright?.includes('RAYHAN')) {
-            parsed.contact.copyright = '© 2026 HRISHU SINHA · ALL RIGHTS RESERVED';
-          }
-        }
-        if (parsed?.stats?.[0]?.number === '3+') {
-          parsed.stats[0].number = '1+';
-          parsed.stats[0].label = 'YEARS INTENSIVE';
-        }
-        if (parsed?.theme) {
-          parsed.theme.fadeDuration = 1.5;
-        }
-        return parsed;
-      }
-    } catch {
-      // ignore
-    }
-    return initialContent;
-  });
+  const [content] = useState<PortfolioContent>(initialContent);
 
   const [projects] = useState<ProjectItem[]>(initialProjects);
   const [capabilities] = useState(initialCapabilities);
